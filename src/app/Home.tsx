@@ -21,6 +21,13 @@ export const Home = async ({ req }: { req: NextRequest }) => {
   const medianUser = users[medianIndex];
   const medianUserNext = users[medianIndex + 1];
 
+  let medianValue;
+  if (users.length % 2 === 0) {
+    medianValue = (medianUser.score + medianUserNext.score) / 2;
+  } else {
+    medianValue = medianUser.score;
+  }
+
   return (
     <main className="flex min-h-screen mx-auto max-w-2xl flex-col items-center justify-between space-y-2 p-4 sm:p-24">
       <Card
@@ -28,7 +35,7 @@ export const Home = async ({ req }: { req: NextRequest }) => {
         style={{ minWidth: "100%" }}
       >
         <CardContent>
-          <CardTitle className="mb-4">League Median</CardTitle>
+          <CardTitle className="mb-4">League Median: {medianValue}</CardTitle>
           <CardDescription>
             {`The median is between ${medianUser?.display_name} and ${medianUserNext?.display_name}`}
             {medianUser &&
