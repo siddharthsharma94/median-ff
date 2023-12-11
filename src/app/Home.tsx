@@ -13,10 +13,6 @@ import { useSearchParams } from "next/navigation";
 import { NextRequest } from "next/server";
 
 export const Home = async ({ req }: { req: NextRequest }) => {
-  const queryParam = req;
-
-  console.log(queryParam);
-
   // const searchParams = useSearchParams();
 
   const leagueId = "974399495632891904";
