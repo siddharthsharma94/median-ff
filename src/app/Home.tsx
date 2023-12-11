@@ -12,7 +12,7 @@ import { cx } from "class-variance-authority";
 import { useSearchParams } from "next/navigation";
 import { NextRequest } from "next/server";
 
-export const Home = async ({ req }: { req: NextRequest }) => {
+export const Home = async () => {
   // const searchParams = useSearchParams();
 
   const leagueId = "974399495632891904";
