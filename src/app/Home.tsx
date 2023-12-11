@@ -8,9 +8,15 @@ import {
 } from "@/components/ui/card";
 import { api } from "@/lib/trpc/api";
 import { trpc } from "@/lib/trpc/client";
+import { cx } from "class-variance-authority";
 import { useSearchParams } from "next/navigation";
+import { NextRequest } from "next/server";
 
-export const Home = async () => {
+export const Home = async ({ req }: { req: NextRequest }) => {
+  const queryParam = req;
+
+  console.log(queryParam);
+
   // const searchParams = useSearchParams();
 
   const leagueId = "974399495632891904";
@@ -20,8 +26,11 @@ export const Home = async () => {
   const medianUserNext = users[medianIndex + 1];
 
   return (
-    <main className="flex min-h-screen max-w-lg mx-auto flex-col items-center justify-between space-y-2 p-24">
-      <Card className="mb-8 min-w-lg p-4" style={{ minWidth: "500px" }}>
+    <main className="flex min-h-screen mx-auto max-w-2xl flex-col items-center justify-between space-y-2 p-4 sm:p-24">
+      <Card
+        className="mb-8 min-w-full sm:min-w-lg p-4"
+        style={{ minWidth: "100%" }}
+      >
         <CardContent>
           <CardTitle className="mb-4">League Median</CardTitle>
           <CardDescription>
@@ -40,12 +49,12 @@ export const Home = async () => {
       {users?.map((user) => (
         <Card
           key={user.user_id}
-          style={{ minWidth: "500px" }}
-          className={
+          style={{ minWidth: "100%", maxWidth: "500px" }}
+          className={cx(
             user === medianUser || user === medianUserNext
-              ? "bg-yellow-200"
+              ? "bg-yellow-200 border-yellow-400 border-2 border-dotted"
               : ""
-          }
+          )}
         >
           <CardHeader>
             <Avatar>
